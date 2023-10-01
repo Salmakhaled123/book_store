@@ -1,7 +1,10 @@
 import 'package:bookstore/core/appfont/styles.dart';
 import 'package:bookstore/core/cacheHelper/cacheHelper.dart';
+import 'package:bookstore/screens/best%20sellers%20books/view/best%20seller%20view.dart';
+import 'package:bookstore/screens/book_details/presentation/view/book_details_view.dart';
 import 'package:bookstore/screens/books/view/books_view.dart';
 import 'package:bookstore/screens/home_view/presentation/view%20models/home_cubit.dart';
+import 'package:bookstore/screens/new%20arrival%20books/view/new%20arrivals%20view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +90,7 @@ class HomeViewBody extends StatelessWidget {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const BooksView()));
+                                          builder: (context) => const BestSellerView()));
                                 },
                                 icon: const Icon(Icons.arrow_forward)),
                           ],
@@ -167,7 +170,7 @@ class HomeViewBody extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                             onPressed: () {
-
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>const NewArrivalsView()));
                             },
                             icon: const Icon(Icons.arrow_forward)),
                       ],
@@ -178,73 +181,77 @@ class HomeViewBody extends StatelessWidget {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(16),
-                                    child: CachedNetworkImage(
-                                      imageUrl:'${cubit.newArrivalsModel?.data.products[index].image}' ,placeholder:(context, url) =>  Shimmer.fromColors(
-                                        baseColor: Colors.grey[400]!,
-                                        highlightColor: Colors.grey[300]!,
-                                        child: Container(width: 100.w,height: 100.h,decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)))) ,errorWidget:(context, url, error) => const Icon(Icons.error) ,
-                                       ),
+                      itemBuilder: (context, index) => InkWell(onTap: (){
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=> BookDetailsView(model: cubit.newArrivalsModel!.data.products[index],)));
+                      },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(16),
+                                      child: CachedNetworkImage(
+                                        imageUrl:'${cubit.newArrivalsModel?.data.products[index].image}' ,placeholder:(context, url) =>  Shimmer.fromColors(
+                                          baseColor: Colors.grey[400]!,
+                                          highlightColor: Colors.grey[300]!,
+                                          child: Container(width: 100.w,height: 100.h,decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)))) ,errorWidget:(context, url, error) => const Icon(Icons.error) ,
+                                         ),
 
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Container(color: Colors.red,child:
-                                    Text('${cubit.newArrivalsModel?.data.products[index].discount} %',style: Styles.textStyle14,),),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: 100.w,
-                              child: Text(
-                                cubit.newArrivalsModel!.data.products[index].name,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: Styles.textStyle14
-                                    .copyWith(fontWeight: FontWeight.bold
-
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Container(color: Colors.red,child:
+                                      Text('${cubit.newArrivalsModel?.data.products[index].discount} %',style: Styles.textStyle14,),),
+                                    )
+                                  ],
                                 ),
                               ),
-                            ),
-                            Text(
-                              cubit.newArrivalsModel!.data.products[index].category,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: Styles.textStyle14
+                              SizedBox(width: 100.w,
+                                child: Text(
+                                  cubit.newArrivalsModel!.data.products[index].name,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: Styles.textStyle14
+                                      .copyWith(fontWeight: FontWeight.bold
 
-                                  .copyWith(
+                                  ),
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 10,),
-                            Text(
-                              '${cubit.newArrivalsModel!.data.products[index].price} L.E',
+                              Text(
+                                cubit.newArrivalsModel!.data.products[index].category,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Styles.textStyle14
 
-                              style: Styles.textStyle16
-                                  .copyWith(decoration: TextDecoration.lineThrough,
-                                color: Colors.deepPurple,
+                                    .copyWith(
+                                ),
                               ),
-                            ),
-                           const SizedBox(height: 10,),
-                            Text(
-                              '${cubit.newArrivalsModel!.data.products[index].priceAfterDiscount} L.E',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: Styles.textStyle16
-                                  .copyWith(
-                                color: Colors.deepPurple,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                              const SizedBox(height: 10,),
+                              Text(
+                                '${cubit.newArrivalsModel!.data.products[index].price} L.E',
 
-                          ],
+                                style: Styles.textStyle16
+                                    .copyWith(decoration: TextDecoration.lineThrough,
+                                  color: Colors.deepPurple,
+                                ),
+                              ),
+                             const SizedBox(height: 10,),
+                              Text(
+                                '${cubit.newArrivalsModel!.data.products[index].priceAfterDiscount} L.E',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Styles.textStyle16
+                                    .copyWith(
+                                  color: Colors.deepPurple,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                            ],
+                          ),
                         ),
                       ),
                       itemCount: cubit.newArrivalsModel?.data.products.length,

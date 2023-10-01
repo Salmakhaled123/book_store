@@ -15,8 +15,7 @@ class DioHelper {
     Map<String, dynamic>? data,
   }) async {
     dio?.options.headers = {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer${CacheHelper.getData(key: 'token')}'
+      'Authorization': 'Bearer ${CacheHelper.getData(key: 'token')}'
     };
     return await dio!.post(
       endPoint!,
@@ -28,7 +27,7 @@ class DioHelper {
     return await dio!.get(endPoint,
         options: Options(headers: {
           'Authorization':
-              'Bearer${CacheHelper.getData(key: 'token')}'
+              'Bearer ${CacheHelper.getData(key: 'token')}'
         }));
   }
 }

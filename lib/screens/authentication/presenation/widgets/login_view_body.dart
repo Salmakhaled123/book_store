@@ -1,5 +1,6 @@
 import 'package:bookstore/core/appImages/images.dart';
 import 'package:bookstore/screens/home_view/presentation/views/widgets/home_view_body.dart';
+import 'package:bookstore/screens/profile/view%20model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

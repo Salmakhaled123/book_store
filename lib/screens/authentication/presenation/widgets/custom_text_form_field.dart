@@ -5,13 +5,14 @@ class CustomTextFormField extends StatelessWidget {
       {Key? key,
       this.suffixIcon,
       this.suffix,
+       this.readonly=false,
       required this.controller,
       required this.hintText,
       required this.prefix,
       required this.obscureText,
       required this.type,
       this.onChanged,
-      this.validate})
+      this.validate,})
       : super(key: key);
   final TextEditingController controller;
   final String hintText;
@@ -21,11 +22,12 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffix;
   final Widget? suffixIcon;
   final Function(String)? onChanged;
+ final bool readonly;
 
   final String? Function(String?)? validate;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return TextFormField(readOnly:readonly,
         controller: controller,
         obscureText: obscureText,
         keyboardType: type,

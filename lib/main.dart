@@ -2,8 +2,10 @@ import 'package:bookstore/core/cacheHelper/cacheHelper.dart';
 import 'package:bookstore/core/diohelper/dio.dart';
 import 'package:bookstore/screens/authentication/data/login_register_cubit.dart';
 import 'package:bookstore/screens/authentication/presenation/register_view.dart';
+import 'package:bookstore/screens/book_details/presentation/view%20model/book_details_cubit.dart';
 import 'package:bookstore/screens/home_view/presentation/view%20models/home_cubit.dart';
 import 'package:bookstore/screens/on_boardiing_view/presentation/views/on%20boarding%20view.dart';
+import 'package:bookstore/screens/profile/view%20model/profile_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,11 +37,17 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginRegisterCubit(),
           ),
           BlocProvider(
+            create: (context) => BookDetailsCubit(),
+          ),
+          BlocProvider(
+            create: (context) => ProfileCubit()..getGovernorates(),
+          ),
+          BlocProvider(
             create: (context) => HomeCubit()..getAllSliders()..
             getBestSellers()..getAllBooks()..getAllCategories()..getNewArrivals(),
           ),
         ],
-          child: MaterialApp(
+          child: MaterialApp(theme: ThemeData(primarySwatch: Colors.deepPurple),
             debugShowCheckedModeBanner: false,
             title: 'Book Store',
             home: child,

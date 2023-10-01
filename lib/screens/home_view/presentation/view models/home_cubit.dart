@@ -67,13 +67,16 @@ class HomeCubit extends Cubit<HomeState> {
   ];
   int selectedIndex=0;
   BookModel ?booksModel;
+
   getAllBooks()async
   {
+
     emit(GetAllBooksLoading());
     try {
       Response response=await DioHelper.getData(endPoint: '/products');
       booksModel=BookModel.fromJson(response.data);
       print(model?.message);
+
       emit(GetAllBooksSuccess());
     } on Exception catch (e) {
       if(e is DioException)

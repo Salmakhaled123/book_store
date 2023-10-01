@@ -14,6 +14,7 @@ import 'package:meta/meta.dart';
 import '../../../core/cacheHelper/cacheHelper.dart';
 import '../../../core/diohelper/dio.dart';
 import '../../home_view/presentation/views/home_view.dart';
+import '../../profile/view model/profile_cubit.dart';
 
 part 'login_register_state.dart';
 
@@ -43,11 +44,10 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
       await CacheHelper.saveData(
           key: 'token', value: response.data['data']['token']);
       print(CacheHelper.getData(key: 'token'));
-
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('${response.data['message']}')));
       Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeView()));
-
+      BlocProvider.of<ProfileCubit>(context).showProfile();
       emit(LoginRegisterSuccess());
       nameController.clear();
       emailController.clear();
@@ -67,7 +67,6 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
       emit(LoginRegisterFailure());
     }
   }
-
   Future userLogin(context) async {
     emit(LoginLoading());
     try {
@@ -78,9 +77,11 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
       model = UserDataModel.fromJson(response.data);
       print(model?.data.user.emailVerified);
       print(response.data['message']);
+
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('${response.data['message']}')));
       Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeView()));
+      BlocProvider.of<ProfileCubit>(context).showProfile();
 
       emit(LoginSuccess());
     } on Exception catch (e) {
@@ -88,7 +89,6 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
       emit(LoginFailure());
     }
   }
-
   bool suffix = false;
   bool suffixConfirmPass=false;
   changeVisibilityConfirmPassword()
