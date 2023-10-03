@@ -4,6 +4,7 @@ import 'package:bookstore/screens/authentication/data/login_register_cubit.dart'
 import 'package:bookstore/screens/authentication/presenation/register_view.dart';
 import 'package:bookstore/screens/book_details/presentation/view%20model/book_details_cubit.dart';
 import 'package:bookstore/screens/cart/view%20model/cart_cubit.dart';
+import 'package:bookstore/screens/favorite/view%20model/favorite_cubit.dart';
 import 'package:bookstore/screens/home_view/presentation/view%20models/home_cubit.dart';
 import 'package:bookstore/screens/on_boardiing_view/presentation/views/on%20boarding%20view.dart';
 import 'package:bookstore/screens/profile/view%20model/profile_cubit.dart';
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => CartCubit()..showCart(),
+          ),
+          BlocProvider(
+            create: (context) => FavoriteCubit()..showWishList(),
           ),
           BlocProvider(
             create: (context) => BookDetailsCubit(),

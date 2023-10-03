@@ -3,9 +3,11 @@ import 'package:bookstore/screens/home_view/data/best_seller_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../home_view/data/book_model.dart';
 class BookDetailsView extends StatelessWidget {
   const BookDetailsView({Key? key, required this.model}) : super(key: key);
-final Products model;
+final dynamic model;
   @override
   Widget build(BuildContext context)
   {
