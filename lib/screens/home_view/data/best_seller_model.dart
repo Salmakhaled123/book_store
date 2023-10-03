@@ -49,7 +49,7 @@ class Products {
   late final String description;
   late final String price;
   late final int discount;
-  late final double priceAfterDiscount;
+  late final num priceAfterDiscount;
   late final int stock;
   late final int bestSeller;
   late final String image;

@@ -11,3 +11,5 @@ class UpdateProfileFailed extends ProfileState {}
 class GovernoratesGetSuccessfully extends ProfileState {}
 class GovernoratesGetFailed extends ProfileState {}
 class ChangeCitySuccessfully extends ProfileState {}
+class PLaceOrderSuccessfully extends ProfileState{}
+class PlaceOrderFailed extends ProfileState{}

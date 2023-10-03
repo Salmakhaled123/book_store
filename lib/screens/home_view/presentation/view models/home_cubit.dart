@@ -18,122 +18,149 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
-  SliderModel ?model;
-  getAllSliders()async
-  {
+  SliderModel? model;
+  ScrollController scrollController = ScrollController();
+  getAllSliders() async {
     emit(HomeLoading());
     try {
-      Response response=await DioHelper.getData(endPoint: '/sliders');
-      model=SliderModel.fromJson(response.data);
+      Response response = await DioHelper.getData(endPoint: '/sliders');
+      model = SliderModel.fromJson(response.data);
       print(model?.message);
       emit(HomeSuccess());
     } on Exception catch (e) {
-      if(e is DioException)
-        {
-          print(e.response?.data);
-        }
+      if (e is DioException) {
+        print(e.response?.data);
+      }
       print(e.toString());
       emit(HomeFailure());
     }
-
   }
-  BestSellerModel ?bestSellerModel;
-  getBestSellers()async
-  {
+
+  BestSellerModel? bestSellerModel;
+  getBestSellers() async {
     emit(HomeBestSellerLoading());
     try {
-      Response response=await DioHelper.getData(endPoint: '/products-bestseller');
-      bestSellerModel=BestSellerModel.fromJson(response.data);
+      Response response =
+          await DioHelper.getData(endPoint: '/products-bestseller');
+      bestSellerModel = BestSellerModel.fromJson(response.data);
       print(model?.message);
       emit(HomeBestSellerSuccess());
     } on Exception catch (e) {
-      if(e is DioException)
-      {
+      if (e is DioException) {
         print(e.response?.data);
       }
       print(e.toString());
       emit(HomeBestSellerFailure());
     }
-
   }
-  List<BottomNavigationBarItem>items=[
-    const BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Home',),
-    const BottomNavigationBarItem(icon: Icon(Icons.book),label: 'Books',),
-    const BottomNavigationBarItem(icon: Icon(Icons.favorite_border_outlined),label: 'favorite',),
-    const BottomNavigationBarItem(icon: Icon(Icons.shopping_cart),label: 'Cart',),
-    const BottomNavigationBarItem(icon: Icon(Icons.person),label: 'Profile',),
 
-
+  List<BottomNavigationBarItem> items = [
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'Home',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.book),
+      label: 'Books',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.favorite_border_outlined),
+      label: 'favorite',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.shopping_cart),
+      label: 'Cart',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.person),
+      label: 'Profile',
+    ),
   ];
-  int selectedIndex=0;
-  BookModel ?booksModel;
-
-  getAllBooks()async
-  {
-
+  int selectedIndex = 0;
+  BookModel? booksModel;
+  int page = 1;
+  List<ProductData>books=[];
+  getAllBooks() async {
     emit(GetAllBooksLoading());
     try {
-      Response response=await DioHelper.getData(endPoint: '/products');
-      booksModel=BookModel.fromJson(response.data);
-      print(model?.message);
+      Response response = await DioHelper.getData(
+          endPoint: '/products?page=$page');
+      response.data['data']['products'].map((item){
+        books.add(ProductData.fromJson(item));
+      }).toList();
+      print(books);
+      print(books.length);
+     // booksModel = BookModel.fromJson(response.data);
+     // print(model?.message);
 
       emit(GetAllBooksSuccess());
     } on Exception catch (e) {
-      if(e is DioException)
-      {
+      if (e is DioException) {
         print(e.response?.data);
       }
       print(e.toString());
       emit(GetAllBooksFailure());
     }
-
   }
-  changeIndex(value)
-  {
-    selectedIndex=value;
+
+  bool isLoadMore = false;
+  getMoreData() {
+    scrollController.addListener(() async {
+      if (page == 4) {
+        return;
+      } else if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        isLoadMore = true;
+        if (page <= 4) {
+          page++;
+          await getAllBooks();
+
+        }
+      }
+      isLoadMore = false;
+    });
+  }
+
+  changeIndex(value) {
+    selectedIndex = value;
     emit(HomeChangeIndexSuccess());
   }
-  List<Widget>views=const [
+
+  List<Widget> views = const [
     HomeViewBody(),
     BooksView(),
     FavoriteView(),
     CartView(),
     ProfileView()
   ];
-  CategoriesModel ?categoriesModel;
-  getAllCategories()async
-  {
+  CategoriesModel? categoriesModel;
+  getAllCategories() async {
     emit(GetAllCategoriesLoading());
     try {
-      Response response=await DioHelper.getData(endPoint: '/categories');
-      categoriesModel=CategoriesModel.fromJson(response.data);
+      Response response = await DioHelper.getData(endPoint: '/categories');
+      categoriesModel = CategoriesModel.fromJson(response.data);
       emit(GetAllCategoriesSuccess());
     } on Exception catch (e) {
-      if(e is DioException)
-        {
-          print(e.response?.data);
-        }
+      if (e is DioException) {
+        print(e.response?.data);
+      }
       emit(GetAllCategoriesFailure());
-
     }
   }
-  BestSellerModel ?newArrivalsModel;
-  getNewArrivals()async
-  {
+
+  BestSellerModel? newArrivalsModel;
+  getNewArrivals() async {
     emit(GetNewArrivalsLoading());
     try {
-      Response response=await DioHelper.getData(endPoint: '/products-new-arrivals');
-      newArrivalsModel=BestSellerModel.fromJson(response.data);
+      Response response =
+          await DioHelper.getData(endPoint: '/products-new-arrivals');
+      newArrivalsModel = BestSellerModel.fromJson(response.data);
       emit(GetNewArrivalsSuccess());
     } on Exception catch (e) {
-      if(e is DioException)
-      {
+      if (e is DioException) {
         print(e.response?.data);
       }
       emit(GetNewArrivalsFailure());
-
     }
   }
-  
-
 }

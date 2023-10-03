@@ -24,19 +24,19 @@ class Data {
     required this.products,
 
   });
-  late final List<Products> products;
+  late final List<ProductData> products;
 
 
   Data.fromJson(Map<String, dynamic> json){
-    products = List.from(json['products']).map((e)=>Products.fromJson(e)).toList();
+    products = List.from(json['products']).map((e)=>ProductData.fromJson(e)).toList();
 
   }
 
 
 }
 
-class Products {
-  Products({
+class ProductData {
+  ProductData({
     required this.id,
     required this.name,
     required this.description,
@@ -59,7 +59,7 @@ class Products {
   late final String image;
   late final String category;
 
-  Products.fromJson(Map<String, dynamic> json){
+  ProductData.fromJson(Map<String, dynamic> json){
     id = json['id'];
     name = json['name'];
     description = json['description'];

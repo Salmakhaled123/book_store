@@ -20,6 +20,8 @@ class GetAllCategoriesLoading extends HomeState{}
 class GetNewArrivalsSuccess extends HomeState{}
 class GetNewArrivalsFailure extends HomeState{}
 class GetNewArrivalsLoading extends HomeState{}
+class MoreDataLoadedSuccessfully extends HomeState{}
+
 
 
 

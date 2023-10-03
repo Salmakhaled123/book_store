@@ -1,12 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:bookstore/core/diohelper/dio.dart';
+import 'package:bookstore/screens/home_view/presentation/views/home_view.dart';
 import 'package:bookstore/screens/profile/model/governorate_model.dart';
 import 'package:bookstore/screens/profile/model/profile_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meta/meta.dart';
+
+import '../../cart/data/cart_model.dart';
 
 part 'profile_state.dart';
 
@@ -18,7 +20,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   TextEditingController phoneController=TextEditingController();
   TextEditingController cityController=TextEditingController();
   TextEditingController addressController=TextEditingController();
-
+ var formKey3=GlobalKey<FormState>();
   showProfile()async
   {
     try {
@@ -96,5 +98,31 @@ class ProfileCubit extends Cubit<ProfileState> {
     cityController.text=newValue??'';
     emit(ChangeCitySuccessfully());
   }
+  CartModel ?orderModel;
+  placeOrder(context) async {
+    try {
+      Response response =
+      await DioHelper.postData(endPoint: '/place-order', data: {
+        'name':nameController.text,
+        'email':emailController.text,
+        'phone':phoneController.text,
+        'address':addressController.text,
+        'city':cityController.text,
+        'governorate_id':id,
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('${response.data['message']}'),
+      ));
+
+      emit(PLaceOrderSuccessfully());
+    } on Exception catch (e) {
+      if (e is DioException) {
+        print(e.response?.data);
+
+      }
+      emit(PlaceOrderFailed());
+    }
+  }
+  int ?id;
 
 }
