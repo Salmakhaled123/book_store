@@ -87,11 +87,11 @@ class RegisterViewBody extends StatelessWidget {
                   ),
 
                    Row(children:  [
-                    const Text('Already have an account? ',style: Styles.textStyle12,),
+                    const Text('Already have an account? ',style: Styles.textStyle14,),
                     InkWell(onTap: (){
                        AppNavigator.customNavigator(context: context, screen:  const LoginView(), finish: false);
                     },
-                        child: const Text('Login here.',style: Styles.textStyle12,)),
+                        child:  Text('Login here.',style: Styles.textStyle14.copyWith(color: Colors.deepPurple,fontWeight: FontWeight.w500),)),
                   ],),
                   SizedBox(height: 20.h,),
                   SizedBox(

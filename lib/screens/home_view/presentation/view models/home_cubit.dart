@@ -81,6 +81,7 @@ class HomeCubit extends Cubit<HomeState> {
   BookModel? booksModel;
   int page = 1;
   List<ProductData> books = [];
+  int total=0;
   getAllBooks() async {
     emit(GetAllBooksLoading());
     try {
@@ -89,6 +90,8 @@ class HomeCubit extends Cubit<HomeState> {
       response.data['data']['products'].map((item) {
         books.add(ProductData.fromJson(item));
       }).toList();
+      print(response.data['data']['meta']['total']);
+      total=response.data['data']['meta']['total'];
       print(books);
       print(books.length);
       // booksModel = BookModel.fromJson(response.data);
