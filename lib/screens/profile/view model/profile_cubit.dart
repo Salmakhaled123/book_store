@@ -66,7 +66,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         print(e.response?.data);
       }
       print(e.toString());
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('name is required')));
 
       emit(UpdateProfileFailed());
     }
