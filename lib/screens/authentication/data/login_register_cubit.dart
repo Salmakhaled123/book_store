@@ -25,7 +25,6 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmController = TextEditingController();
   var formKey2 = GlobalKey<FormState>();
-  var formKey = GlobalKey<FormState>();
   UserDataModel? model;
   Future userRegister(context) async {
     emit(LoginRegisterLoading());
@@ -53,6 +52,7 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
       emailController.clear();
       passwordController.clear();
       confirmController.clear();
+
     } on Exception catch (e) {
       if (e is DioException) {
         //  registerFailureModel = RegisterFailureModel.fromJson(e.response!.data);
@@ -76,6 +76,7 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
       });
       model = UserDataModel.fromJson(response.data);
       print(model?.data.user.emailVerified);
+     await CacheHelper.saveData(key: 'token', value: model?.data.token);
       print(response.data['message']);
 
       ScaffoldMessenger.of(context)

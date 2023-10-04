@@ -39,26 +39,28 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   }
   addToWishList(productId,context)async
   {
-    try {
-      Response response=await DioHelper.postData(endPoint: '/add-to-wishlist',
-          data: {
-        'product_id':productId,
-      });
-      favorites.add(productId);
-      // if(!favorites.contains(productId))
-      //   {
-      //
-      //   }
-      print(favorites);
-      print(response.data['message']);
-      showWishList();
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.data['message']}')));
-      emit(AddToWishListSuccessFully());
-    } on Exception catch (e) 
-    {
-      print(e.toString());
-      emit(AddToWishListFailed());
-    }
+    if(favorites.contains(productId))
+      {
+        return;
+      }
+        try {
+          Response response=await DioHelper.postData(endPoint: '/add-to-wishlist',
+              data: {
+                'product_id':productId,
+              });
+          favorites.add(productId);
+          print(favorites);
+          print(response.data['message']);
+          showWishList();
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.data['message']}')));
+          emit(AddToWishListSuccessFully());
+        } on Exception catch (e)
+        {
+          print(e.toString());
+          emit(AddToWishListFailed());
+        }
+
+
   }
   removeFromWishList(productId,context)async
   {
@@ -77,5 +79,10 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.da
       print(e.toString());
       emit(RemoveFromWishListFailed());
     }
+  }
+  String priceAfterDiscount(price,discount)
+  {
+    num newPrice1=num.parse(price);
+    return '${newPrice1-(newPrice1*discount/100)} L.E';
   }
 }

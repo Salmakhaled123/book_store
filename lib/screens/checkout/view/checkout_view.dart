@@ -162,7 +162,7 @@ class CheckOutView extends StatelessWidget {
                                 if(cubit.formKey3.currentState!.validate())
                                   {
                                     cubit.placeOrder(context);
-                                    BlocProvider.of<CartCubit>(context).showCart();
+
                                   }
                               },
                               style: ElevatedButton.styleFrom(elevation: 0.0,

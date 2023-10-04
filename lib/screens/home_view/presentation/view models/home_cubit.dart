@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:bookstore/core/diohelper/dio.dart';
+import 'package:bookstore/screens/authentication/presenation/register_view.dart';
 import 'package:bookstore/screens/books/view/books_view.dart';
 import 'package:bookstore/screens/cart/view/cart_view.dart';
 import 'package:bookstore/screens/favorite/view/favorite%20view.dart';
@@ -79,19 +80,19 @@ class HomeCubit extends Cubit<HomeState> {
   int selectedIndex = 0;
   BookModel? booksModel;
   int page = 1;
-  List<ProductData>books=[];
+  List<ProductData> books = [];
   getAllBooks() async {
     emit(GetAllBooksLoading());
     try {
-      Response response = await DioHelper.getData(
-          endPoint: '/products?page=$page');
-      response.data['data']['products'].map((item){
+      Response response =
+          await DioHelper.getData(endPoint: '/products?page=$page');
+      response.data['data']['products'].map((item) {
         books.add(ProductData.fromJson(item));
       }).toList();
       print(books);
       print(books.length);
-     // booksModel = BookModel.fromJson(response.data);
-     // print(model?.message);
+      // booksModel = BookModel.fromJson(response.data);
+      // print(model?.message);
 
       emit(GetAllBooksSuccess());
     } on Exception catch (e) {
@@ -114,7 +115,6 @@ class HomeCubit extends Cubit<HomeState> {
         if (page <= 4) {
           page++;
           await getAllBooks();
-
         }
       }
       isLoadMore = false;
@@ -161,6 +161,39 @@ class HomeCubit extends Cubit<HomeState> {
         print(e.response?.data);
       }
       emit(GetNewArrivalsFailure());
+    }
+  }
+
+  BestSellerModel? searchModel;
+  TextEditingController searchController = TextEditingController();
+  searchForProduct(context) async {
+    try {
+      emit(SearchLoading());
+      Response response = await DioHelper.getData(
+          endPoint: '/products-search?name=${searchController.text}');
+      searchModel = BestSellerModel.fromJson(response.data);
+      print(searchModel?.message);
+      emit(SearchSuccess());
+      searchController.clear();
+    } on Exception catch (e) {
+      if (e is DioException) {
+        print(e.response?.data);
+      }
+      print(e.toString());
+      emit(SearchFailed());
+    }
+  }
+  logOut(context)async
+  {
+    try {
+      Response response=await DioHelper.postData(endPoint: '/logout');
+      print(response.data['message']);
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterView()));
+      emit(LogOutSuccessfully());
+    } on Exception catch (e)
+    {
+      print(e.toString());
+      emit(LogOutFailed());
     }
   }
 }

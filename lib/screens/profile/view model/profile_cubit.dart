@@ -6,9 +6,11 @@ import 'package:bookstore/screens/profile/model/profile_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../cart/data/cart_model.dart';
+import '../../cart/view model/cart_cubit.dart';
 
 part 'profile_state.dart';
 
@@ -113,7 +115,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('${response.data['message']}'),
       ));
-
+      BlocProvider.of<CartCubit>(context).showCart();
       emit(PLaceOrderSuccessfully());
     } on Exception catch (e) {
       if (e is DioException) {

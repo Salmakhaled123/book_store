@@ -2,8 +2,8 @@ import 'package:bookstore/core/appfont/styles.dart';
 import 'package:bookstore/core/cacheHelper/cacheHelper.dart';
 import 'package:bookstore/screens/best%20sellers%20books/view/best%20seller%20view.dart';
 import 'package:bookstore/screens/book_details/presentation/view/book_details_view.dart';
-import 'package:bookstore/screens/books/view/books_view.dart';
 import 'package:bookstore/screens/home_view/presentation/view%20models/home_cubit.dart';
+import 'package:bookstore/screens/home_view/presentation/views/search_view.dart';
 import 'package:bookstore/screens/new%20arrival%20books/view/new%20arrivals%20view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-
 import 'bookitemlistview.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -28,14 +27,34 @@ class HomeViewBody extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 10.h,),
-                   Text(
-                    'Welcome ${CacheHelper.getData(key: 'name')}',
-                    style: Styles.textStyle20,
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
+                  Row(children: [
+                    Text('Welcome ${CacheHelper.getData(key: 'name')}',style: Styles.textStyle20,),
+                    const Spacer(),
+                    InkWell(onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const SearchView()));
+                    },
+                      child: const Icon(Icons.search),),
+                    SizedBox(width: 10.w,),
+                    InkWell(onTap: ()
+                    {
+                       showDialog(context: context, builder: (context){
+                         return  AlertDialog(backgroundColor: Colors.deepPurple[300],
+                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                           title: const Text('Log out'),
+                         content: const Text('Are you sure you want to logout?'),
+                         actions: [
+                           TextButton(onPressed: ()
+                           {
+                             cubit.logOut(context);
+                           }, child:  Text('Yes',style: Styles.textStyle16.copyWith(color:Colors.black ),)),
+                           TextButton(onPressed: (){
+                             Navigator.pop(context);
+                           }, child:  Text('No',style: Styles.textStyle16.copyWith(color:Colors.black )))
+                         ],);
+                       });
+                    },
+                      child: const Icon(Icons.logout),)
+                  ],),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

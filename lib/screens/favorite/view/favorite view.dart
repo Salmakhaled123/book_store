@@ -1,4 +1,3 @@
-import 'package:bookstore/screens/cart/view%20model/cart_cubit.dart';
 import 'package:bookstore/screens/favorite/view%20model/favorite_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -96,20 +95,13 @@ class FavoriteView extends StatelessWidget {
                               SizedBox(
                                 height: 5.h,
                               ),
-                              Text(
-                                '${cubit.favoriteModel?.data.data[index].price}'
-                                    'L.E ',
+                              Text(cubit.priceAfterDiscount(cubit.favoriteModel?.data.data[index].price, cubit.favoriteModel?.data.data[index].discount)
+                                ,
                                 style: Styles.textStyle16.copyWith(
                                     color: Colors.deepPurple,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(
-                                'discount :${cubit.favoriteModel?.data.data[index].discount}'
-                                    '% ',
-                                style: Styles.textStyle16.copyWith(
-                                    color: Colors.deepPurple,
-                                    fontWeight: FontWeight.bold),
-                              ),
+
                             ],
                           ),
                           Column(

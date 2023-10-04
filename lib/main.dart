@@ -8,6 +8,7 @@ import 'package:bookstore/screens/favorite/view%20model/favorite_cubit.dart';
 import 'package:bookstore/screens/home_view/presentation/view%20models/home_cubit.dart';
 import 'package:bookstore/screens/on_boardiing_view/presentation/views/on%20boarding%20view.dart';
 import 'package:bookstore/screens/profile/view%20model/profile_cubit.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,7 +56,8 @@ class MyApp extends StatelessWidget {
             getBestSellers()..getAllBooks()..getAllCategories()..getNewArrivals(),
           ),
         ],
-          child: MaterialApp(theme: ThemeData(primarySwatch: Colors.deepPurple),
+          child: MaterialApp(
+            theme: ThemeData(primarySwatch: Colors.deepPurple),
             debugShowCheckedModeBanner: false,
             title: 'Book Store',
             home: child,

@@ -110,6 +110,7 @@ int quantity=1;
     try {
       Response response=await DioHelper.getData(endPoint: '/checkout');
       checkOutCart =CartModel.fromJson(response.data);
+
       emit(CheckOutSuccessfully());
     } on Exception catch (e) {
 

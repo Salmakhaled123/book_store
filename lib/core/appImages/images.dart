@@ -5,6 +5,8 @@ class AppImages{
   static const String register='assets/register.png';
   static const String books='assets/books.jpg';
   static const String emptyCart='assets/emptycart.png';
+  static const String search='assets/search.png';
+
 
 
 

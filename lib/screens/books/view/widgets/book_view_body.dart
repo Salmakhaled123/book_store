@@ -97,8 +97,6 @@ class BookViewBody extends StatelessWidget {
                              )
                            ],
                          )
-
-
                        ],
                      ),
                    ),

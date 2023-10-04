@@ -21,6 +21,11 @@ class GetNewArrivalsSuccess extends HomeState{}
 class GetNewArrivalsFailure extends HomeState{}
 class GetNewArrivalsLoading extends HomeState{}
 class MoreDataLoadedSuccessfully extends HomeState{}
+class SearchLoading extends HomeState{}
+class SearchSuccess extends HomeState{}
+class SearchFailed extends HomeState{}
+class LogOutSuccessfully extends HomeState{}
+class LogOutFailed extends HomeState{}
 
 
 

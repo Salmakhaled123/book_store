@@ -4,22 +4,24 @@ import 'package:bookstore/screens/authentication/presenation/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/appcolors/colors.dart';
 import '../../../../core/appfont/styles.dart';
 import '../../data/login_register_cubit.dart';
 import 'custom_text_form_field.dart';
 
 class RegisterViewBody extends StatelessWidget {
   const RegisterViewBody({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    var formKey = GlobalKey<FormState>();
+
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 48.h, horizontal: 24.w),
         child: BlocBuilder<LoginRegisterCubit, LoginRegisterState>(
           builder: (context, state) {
             var cubit=BlocProvider.of<LoginRegisterCubit>(context);
-            return Form(key: cubit.formKey,
+            return Form(key: formKey,
               child: Column(  crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                Image.asset(AppImages.register,width: 200.w,height: 200.h,),
@@ -105,7 +107,7 @@ class RegisterViewBody extends StatelessWidget {
                       child: ElevatedButton(
                           onPressed: ()  {
 
-                            if (cubit.formKey.currentState!.validate())
+                            if (formKey.currentState!.validate())
                                {
                               cubit.userRegister(context);
                             }

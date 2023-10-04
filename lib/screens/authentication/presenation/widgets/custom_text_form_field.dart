@@ -11,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
       required this.prefix,
       required this.obscureText,
       required this.type,
+        this.onFieldSubmitted,
       this.onChanged,
       this.validate,})
       : super(key: key);
@@ -23,15 +24,17 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Function(String)? onChanged;
  final bool readonly;
+ final void Function(String)? onFieldSubmitted;
 
   final String? Function(String?)? validate;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(readOnly:readonly,
+    return TextFormField(readOnly:readonly,onFieldSubmitted:onFieldSubmitted ,
         controller: controller,
         obscureText: obscureText,
         keyboardType: type,
         validator: validate,
+
         decoration: InputDecoration(
             hintText: hintText,
             suffix: suffix,

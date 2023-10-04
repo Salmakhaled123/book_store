@@ -1,7 +1,9 @@
 import 'package:bookstore/core/appfont/styles.dart';
+import 'package:bookstore/screens/cart/view%20model/cart_cubit.dart';
 import 'package:bookstore/screens/home_view/data/best_seller_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../home_view/data/book_model.dart';
@@ -87,15 +89,21 @@ final dynamic model;
                         Colors.blueAccent,
 
                       ])),
-                    child: ElevatedButton(
-                        onPressed: ()  {
-
+                    child: BlocBuilder<CartCubit, CartState>(
+  builder: (context, state)
+  { var cubit=BlocProvider.of<CartCubit>(context);
+              return ElevatedButton(
+                        onPressed: ()
+                        {
+                              cubit.addToCart(model.id, context);
                         },
                         style: ElevatedButton.styleFrom(elevation: 0.0,
                             padding: EdgeInsets.zero,backgroundColor:Colors.transparent
                         ),
                         child:
-                             const Text('Add to Cart')),
+                             const Text('Add to Cart'));
+  },
+),
                   ),
                 ),
               ),
