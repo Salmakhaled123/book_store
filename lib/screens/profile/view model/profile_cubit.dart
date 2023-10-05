@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:bookstore/core/cacheHelper/cacheHelper.dart';
 import 'package:bookstore/core/diohelper/dio.dart';
 import 'package:bookstore/screens/profile/model/governorate_model.dart';
 import 'package:bookstore/screens/profile/model/profile_model.dart';
@@ -51,6 +52,7 @@ class ProfileCubit extends Cubit<ProfileState>
         'address':addressController.text,
         'city':newValue
       });
+      await CacheHelper.saveData(key: 'name', value: nameController.text);
       model=ProfileModel.fromJson(response.data);
       print(response.data);
      ScaffoldMessenger.of(context).showSnackBar(
