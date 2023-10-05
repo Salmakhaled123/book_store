@@ -1,12 +1,11 @@
-import 'package:bookstore/core/appImages/images.dart';
-import 'package:bookstore/screens/authentication/data/login_register_cubit.dart';
-import 'package:bookstore/screens/authentication/presenation/register_view.dart';
+import 'package:bookstore/screens/authentication/presenation/views/widgets/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../core/appfont/styles.dart';
+import '../../../authentication/view model/login_register_cubit.dart';
 
 class OnBoardingView extends StatelessWidget {
   const OnBoardingView({super.key});

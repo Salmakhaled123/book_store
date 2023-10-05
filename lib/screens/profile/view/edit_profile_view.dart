@@ -1,10 +1,10 @@
 import 'package:bookstore/core/appfont/styles.dart';
-import 'package:bookstore/screens/authentication/presenation/widgets/custom_text_form_field.dart';
-import 'package:bookstore/screens/profile/model/governorate_model.dart';
 import 'package:bookstore/screens/profile/view%20model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../authentication/presenation/views/widgets/custom_text_form_field.dart';
 class EditProfileView extends StatelessWidget {
   const EditProfileView({Key? key}) : super(key: key);
 

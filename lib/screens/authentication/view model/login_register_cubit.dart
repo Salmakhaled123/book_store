@@ -83,7 +83,8 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
           .showSnackBar(SnackBar(content: Text('${response.data['message']}')));
       Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeView()));
       BlocProvider.of<ProfileCubit>(context).showProfile();
-
+           emailController.clear();
+           passwordController.clear();
       emit(LoginSuccess());
     } on Exception catch (e) {
       print(e.toString());

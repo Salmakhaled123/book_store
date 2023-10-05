@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:bookstore/core/diohelper/dio.dart';
-import 'package:bookstore/screens/authentication/presenation/register_view.dart';
+import 'package:bookstore/screens/authentication/presenation/views/widgets/register_view.dart';
 import 'package:bookstore/screens/books/view/books_view.dart';
 import 'package:bookstore/screens/cart/view/cart_view.dart';
 import 'package:bookstore/screens/favorite/view/favorite%20view.dart';
@@ -82,6 +82,7 @@ class HomeCubit extends Cubit<HomeState> {
   int page = 1;
   List<ProductData> books = [];
   int total=0;
+  int lastPage=1;
   getAllBooks() async {
     emit(GetAllBooksLoading());
     try {
@@ -92,8 +93,9 @@ class HomeCubit extends Cubit<HomeState> {
       }).toList();
       print(response.data['data']['meta']['total']);
       total=response.data['data']['meta']['total'];
-      print(books);
+      lastPage=response.data['data']['meta']['last_page'];
       print(books.length);
+      print(lastPage);
       // booksModel = BookModel.fromJson(response.data);
       // print(model?.message);
 
@@ -110,12 +112,12 @@ class HomeCubit extends Cubit<HomeState> {
   bool isLoadMore = false;
   getMoreData() {
     scrollController.addListener(() async {
-      if (page == 4) {
+      if (page == lastPage) {
         return;
       } else if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         isLoadMore = true;
-        if (page <= 4) {
+        if (page <= lastPage) {
           page++;
           await getAllBooks();
         }

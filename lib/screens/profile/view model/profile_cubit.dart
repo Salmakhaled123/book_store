@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:bookstore/core/diohelper/dio.dart';
-import 'package:bookstore/screens/home_view/presentation/views/home_view.dart';
 import 'package:bookstore/screens/profile/model/governorate_model.dart';
 import 'package:bookstore/screens/profile/model/profile_model.dart';
 import 'package:dio/dio.dart';
@@ -8,13 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-
 import '../../cart/data/cart_model.dart';
 import '../../cart/view model/cart_cubit.dart';
-
 part 'profile_state.dart';
 
-class ProfileCubit extends Cubit<ProfileState> {
+class ProfileCubit extends Cubit<ProfileState>
+{
   ProfileCubit() : super(ProfileInitial());
   ProfileModel ? model;
   TextEditingController nameController=TextEditingController();
@@ -70,7 +68,6 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       emit(UpdateProfileFailed());
     }
-
 
   }
    String? newValue;

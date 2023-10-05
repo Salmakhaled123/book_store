@@ -1,13 +1,9 @@
 import 'package:bookstore/core/appImages/images.dart';
-import 'package:bookstore/screens/home_view/presentation/views/widgets/home_view_body.dart';
-import 'package:bookstore/screens/profile/view%20model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/appcolors/colors.dart';
-import '../../../../core/appfont/styles.dart';
-import '../../../home_view/presentation/views/home_view.dart';
-import '../../data/login_register_cubit.dart';
+import '../../../../../core/appfont/styles.dart';
+import '../../../view model/login_register_cubit.dart';
 import 'custom_text_form_field.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -36,7 +32,14 @@ class LoginViewBody extends StatelessWidget {
                   ),
 
 
-                  CustomTextFormField(controller: cubit.emailController,
+                  CustomTextFormField(validate: (value)
+                  {
+                    if(value!.isEmpty)
+                      {
+                        return 'please enter your email';
+                      }
+                  },
+                      controller: cubit.emailController,
                       hintText: 'Email',
                       prefix: Icons.person,
                       obscureText: false,
@@ -49,7 +52,8 @@ class LoginViewBody extends StatelessWidget {
                   },
                       icon: cubit.suffix ? const Icon(Icons.visibility_off):
                       const Icon(Icons.visibility)),
-                      validate: (value){
+                      validate: (value)
+                      {
                         if(value!.isEmpty)
                         {
                           return 'please enter your password';

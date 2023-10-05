@@ -1,4 +1,4 @@
-import 'package:bookstore/screens/authentication/presenation/widgets/register_view_body.dart';
+import 'package:bookstore/screens/authentication/presenation/views/widgets/register_view_body.dart';
 import 'package:flutter/material.dart';
 class RegisterView extends StatelessWidget {
   const RegisterView({Key? key}) : super(key: key);

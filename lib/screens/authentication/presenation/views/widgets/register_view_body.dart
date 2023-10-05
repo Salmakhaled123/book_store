@@ -1,11 +1,11 @@
 import 'package:bookstore/core/appImages/images.dart';
 import 'package:bookstore/core/navigation/navigation.dart';
-import 'package:bookstore/screens/authentication/presenation/login_view.dart';
+import 'package:bookstore/screens/authentication/presenation/views/widgets/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/appfont/styles.dart';
-import '../../data/login_register_cubit.dart';
+import '../../../../../core/appfont/styles.dart';
+import '../../../view model/login_register_cubit.dart';
 import 'custom_text_form_field.dart';
 
 class RegisterViewBody extends StatelessWidget {
@@ -34,7 +34,14 @@ class RegisterViewBody extends StatelessWidget {
                   SizedBox(
                     height: 24.h,
                   ),
-                CustomTextFormField(controller: cubit.nameController,
+                CustomTextFormField(validate: (value)
+                {
+                  if(value!.isEmpty)
+                    {
+                      return 'Please enter your name';
+                    }
+                },
+                    controller: cubit.nameController,
                     hintText: 'Name', prefix: Icons.person, obscureText: false,
                     type: TextInputType.text),
 

@@ -114,10 +114,7 @@ class CartView extends StatelessWidget {
                                       ),
                                       Column(
                                         children: [
-                                          IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(Icons
-                                                  .favorite_border_outlined)),
+                                          SizedBox(height: 20.h,),
                                           IconButton(
                                               onPressed: () {
                                                 cubit.removeFromCart(
