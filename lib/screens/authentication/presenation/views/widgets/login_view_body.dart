@@ -80,7 +80,7 @@ class LoginViewBody extends StatelessWidget {
                             if (cubit.formKey2.currentState!.validate())
                             {
                               cubit.userLogin(context);
-                              print('salmaaa');
+
                             }
                           },
                           style: ElevatedButton.styleFrom(elevation: 0.0,

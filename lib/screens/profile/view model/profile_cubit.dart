@@ -119,7 +119,6 @@ class ProfileCubit extends Cubit<ProfileState>
     } on Exception catch (e) {
       if (e is DioException) {
         print(e.response?.data);
-
       }
       emit(PlaceOrderFailed());
     }

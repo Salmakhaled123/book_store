@@ -25,6 +25,8 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmController = TextEditingController();
   var formKey2 = GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
+
   UserDataModel? model;
   Future userRegister(context) async {
     emit(LoginRegisterLoading());

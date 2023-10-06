@@ -1,4 +1,5 @@
 import 'package:bookstore/core/appImages/images.dart';
+import 'package:bookstore/screens/home_view/data/best_seller_model.dart';
 import 'package:bookstore/screens/home_view/presentation/view%20models/home_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

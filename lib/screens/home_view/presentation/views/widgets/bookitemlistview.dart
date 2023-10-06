@@ -2,10 +2,8 @@ import 'package:bookstore/screens/book_details/presentation/view%20model/book_de
 import 'package:bookstore/screens/book_details/presentation/view/book_details_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../../../core/appfont/styles.dart';
 import '../../../data/best_seller_model.dart';
 class BookItemListView extends StatelessWidget {
