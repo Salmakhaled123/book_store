@@ -72,7 +72,6 @@ class FavoriteCubit extends Cubit<FavoriteState> {
       favorites.remove(productId);
       print(response.data['message']);
       showWishList();
-ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.data['message']}')));
       emit(RemoveFromWishListSuccessFully());
     } on Exception catch (e)
     {

@@ -53,9 +53,7 @@ class CartCubit extends Cubit<CartState> {
         'cart_item_id': cartItemId,
       });
       cartModel = CartModel.fromJson(response.data);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('${cartModel?.message}'),
-      ));
+
       emit(RemoveFromCartSuccessfully());
     } on Exception catch (e) {
       if (e is DioException) {
