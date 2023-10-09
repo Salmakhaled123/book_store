@@ -123,22 +123,27 @@ class CheckOutViewBody extends StatelessWidget {
                       builder: (context, state) {
                         return ListView.builder(physics: const BouncingScrollPhysics(),
                             itemCount:BlocProvider.of<CartCubit>(context).checkOutCart?.data.cartItems.length ?? 0 ,
-                            itemBuilder: (context,index)=>
-                                Padding(
-                                  padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 5.h),
-                                  child: ListTile(tileColor: Colors.grey[300],
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    iconColor: Colors.deepPurple,
-                                    leading: const Icon(Icons.shopping_bag_outlined),
-                                    subtitle:Row(children: [
-                                      Text('Price :${BlocProvider.of<CartCubit>(context).checkOutCart?.data.cartItems[index].itemProductPrice}L.E'),
-                                      SizedBox(width: 10.w,),
-                                      Text('Quantity:${BlocProvider.of<CartCubit>(context).checkOutCart?.data.cartItems[index].itemQuantity}')
-                                    ]),
-                                    title: Text('Product Name :${BlocProvider.of<CartCubit>(context).checkOutCart?.data.cartItems[index].itemProductName}',overflow: TextOverflow.ellipsis,),),
-                                ));
+                            itemBuilder: (context,index)
+                            {
+
+                              double newNum=double.parse(BlocProvider.of<CartCubit>(context).checkOutCart!.data.cartItems[index].itemTotal);
+                          return Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 5.h),
+                            child: ListTile(tileColor: Colors.grey[300],
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              iconColor: Colors.deepPurple,
+                              leading: const Icon(Icons.shopping_bag_outlined),
+                              subtitle:Row(children: [
+                                Text('Price :${newNum}L.E'),
+                                SizedBox(width: 10.w,),
+                                Text('Quantity:${BlocProvider.of<CartCubit>(context).checkOutCart?.data.cartItems[index].itemQuantity}')
+                              ]),
+                              title: Text('Product Name :${BlocProvider.of<CartCubit>(context).checkOutCart?.data.cartItems[index].itemProductName}',overflow: TextOverflow.ellipsis,),),
+                          );
+                            }
+                                );
                       },
                     ),
                   ),

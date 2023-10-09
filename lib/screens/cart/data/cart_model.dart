@@ -70,24 +70,10 @@ class CartItems {
     itemProductImage = json['item_product_image']??'';
     itemProductPrice = json['item_product_price'];
     itemProductDiscount = json['item_product_discount'] ?? 0;
-    itemProductPriceAfterDiscount = json['item_product_price_after_discount'];
+    itemProductPriceAfterDiscount = json['item_product_price_after_discount'] ;
     itemProductStock = json['item_product_stock'] ?? 0;
     itemQuantity = json['item_quantity'];
     itemTotal = json['item_total'];
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['item_id'] = itemId;
-    _data['item_product_id'] = itemProductId;
-    _data['item_product_name'] = itemProductName;
-    _data['item_product_image'] = itemProductImage;
-    _data['item_product_price'] = itemProductPrice;
-    _data['item_product_discount'] = itemProductDiscount;
-    _data['item_product_price_after_discount'] = itemProductPriceAfterDiscount;
-    _data['item_product_stock'] = itemProductStock;
-    _data['item_quantity'] = itemQuantity;
-    _data['item_total'] = itemTotal;
-    return _data;
-  }
 }

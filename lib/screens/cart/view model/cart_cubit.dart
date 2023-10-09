@@ -87,9 +87,10 @@ int quantity=1;
       });
       cartModel = CartModel.fromJson(response.data);
       total=double.parse(cartModel?.data.total).toStringAsFixed(2);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('${cartModel?.message}'),
-      ));
+
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //   content: Text('${cartModel?.message}'),
+      // ));
       emit(UpdatedCartSuccessfully());
     } on Exception catch (e) {
       if (e is DioException) {
