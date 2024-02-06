@@ -1,16 +1,23 @@
-# bookstore
+# Book Store 📚
+ ## app for showing different books and you can buy anybook and put it in wishlist and remove it from wishlist  you can search for anybook you want and see the details of each book in app 
+## Screens 
+- Authentication 🔐
+##### Register,login,logOut
+- Home 🏠
+##### showing different categories about books 
+##### search for anybook you want 🔍
+- Wishlist ❤️
+##### you can add any book and remove from it
+- Profile 👱
+##### show the data for the user
+- Edit profile 💁
+##### you can edit any information about you name , city,phone number ....etc
+## 📹 Video demo :-
+### 🚀packages used in this project
+- ▶️ flutter bloc (state management)
+- ▶️ lottie (animation) 
+- ▶️ Dio (http requests for Apis) 
+- ▶️ shimmer (beautiful loading)
+- ▶️ flutter screenutil (for responsive design)
+  
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
